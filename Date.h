@@ -1,44 +1,119 @@
-#ifndef DATE_H_
-#define DATE_H_
+/**  Date class to handle dates in code.
+*
+* #include "Date.h" <BR>
+* -llib
+*
+*/
+#ifndef DATE_H
+#define DATE_H
 
+// SYSTEM INCLUDES
 #include<iostream>
-using namespace std;
+#include <ctime>
+
 
 // Date class definition
 class Date {
-	int day;
-	int month;
-	int year;
-	static Date defaultDate;	// class variable shared by all objects of date class
-	int checkDay(int) const;	// utility function to confirm proper day value based on month and year
-	bool leapyear(int)const;	// utility function to check leap years
 public:
-	Date(int = 0, int = 0, int = 0);	// Constructor
+// LIFECYCLE
+	/** Default + Overloaded constructor.
+	*/
+	Date(int = 0, int = 0, int = 0);
+										
+	// Use compiler-generated copy constructor, assignment, and destructor.
+	// Date(const Date&);
+	// Date& operator=(const Date&);
+	// ~Date();
 
-	friend ostream & operator <<(ostream &, const Date &);		// Stream Insertion
-	friend istream & operator >>(istream &, Date &);			// Stream Extraction
+// OPERATORS
+	/** Stream Insertion operator.
+	*
+	* @param from The value to be inserted to the output stream.
+	*
+	* @return A reference to the standard output stream.
+	*/
+	friend std::ostream & operator <<(std::ostream& os, const Date& from);
+
+	/** Stream Extraction operator.
+	*
+	* @param to The value to be extracted from the input stream.
+	*
+	* @return A reference to the standard input stream.
+	*/
+	friend std::istream& operator >>(std::istream&, Date& to);
+
+// OPERATIONS
+	/** Add 'X' no. of days to the date object.
+	*
+	* @param x The no. of days to be added.
+	*
+	* @return void
+	*/
+	void AddDay(int x = 0);
+
+	/** Add 'X' no. of months to the date object.
+	*
+	* @param x The no. of months to be added.
+	*
+	* @return void
+	*/
+	void AddMonth(int x = 0);
+
+	/** Add 'X' no. of years to the date object.
+	*
+	* @param x The no. of years to be added.
+	*
+	* @return void
+	*/
+	void AddYear(int x = 0);
+
+	/** Calculate age in years till to date.
+	*
+	* @param void
+	*
+	* @return calculated age in years.
+	*/
+	double CaclAge();
+
+// ACCESS
 
 	// setters
-	void setDay(int);
-	void setMonth(int);
-	void setYear(int);
-	void setDate(int = 0, int = 0, int = 0);
-	void setDate(const Date &);
+	void SetDay(int = 0);
+	void SetMonth(int = 0);
+	void SetYear(int = 0);
+	void SetDate(int = 0, int = 0, int = 0);
+	void SetDate(const Date&);
+	static void sSetDefaultDate(int = 0, int = 0, int = 0);		// default date setter function
 
 	// getters
-	int GET_DAY()const;
-	int GET_MONTH()const;
-	int GET_YEAR()const;
-	const Date & GET_DATE()const;
-	static Date getToDay();
+	int GetDay()const;
+	int GetMonth()const;
+	int GetYear()const;
+	const Date& GetDate()const;
+	static const Date& sGetDefaultDate();
+	static Date sGetTodaysDate();
 
-	void addDay(int);
-	void addMonth(int);
-	void addYear(int);
+private:
+// INQUIRY
+	/** Check for day value based on month and year
+	*
+	* @param testDay The day to be checked.
+	*
+	* @return true if testDay is correct, false otherwise.
+	*/
+	bool CheckDay(int testDay)const;
 
-	double caclAge();
+	/** Check for leap year
+	*
+	* @param testYear The year to be tested for leap years.
+	*
+	* @return true if testYear is a leap year, false otherwise.
+	*/
+	bool IsLeapYear(int testYear)const;
 
-	static void setDefaultDate(int = 0, int = 0, int = 0);		// default date setter function
-	static const Date & getDefaultDate();						// defualt date getter function
+	int mDay;
+	int mMonth;
+	int mYear;
+	static Date msDefaultDate;	// class variable shared by all objects of date class
 }; // end class Date
-#endif
+#endif  // _DATE_H_
