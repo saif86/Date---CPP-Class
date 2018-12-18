@@ -1,8 +1,10 @@
 #ifndef DATE_H_
 #define DATE_H_
-#include <iostream>
 
+#include<iostream>
 using namespace std;
+
+// Date class definition
 class Date
 {
 	int day;
@@ -26,10 +28,10 @@ public:
 	void setDate(const Date &);
 
 	// getters
-	int getDay()const;
-	int getMonth()const;
-	int getYear()const;
-	Date getDate()const;
+	int GET_DAY()const;
+	int GET_MONTH()const;
+	int GET_YEAR()const;
+	const Date & GET_DATE()const;
 	static Date getToDay();
 
 	void addDay(int);
@@ -40,5 +42,5 @@ public:
 
 	static void setDefaultDate(int = 0, int = 0, int = 0);		// default date setter function
 	static const Date & getDefaultDate();						// defualt date getter function
-};
+}; // end class Date
 #endif
