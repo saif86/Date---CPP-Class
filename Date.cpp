@@ -12,12 +12,6 @@ Date::Date(int d, int m, int y) : day(d), month(m), year(y) {
 	this->setDate(d, m, y);
 } // end Date constructor
 
-
-// Date copy Constructor
-Date::Date(const Date & obj) {
-	this->setDate(obj.GET_DAY(), obj.GET_MONTH(), obj.GET_YEAR());
-} // end Date constructor
-
 // Stream Insertion
 ostream & operator<<(ostream & os, const Date & d) {
 	os << d.GET_DAY() << "/" << d.GET_MONTH() << "/" << d.GET_YEAR();
@@ -108,7 +102,6 @@ Date  Date::getToDay() {
 	return t;
 } // end function getToDay
 
-
 // function that adds 'x' no. of days to the date
 void Date::addDay(int x) {
 	static const int daysPerMonth[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -163,7 +156,6 @@ double Date::caclAge() {
 	return y;
 } // end function caclAge
 
-
 // static function that sets default date
 void Date::setDefaultDate(int d, int m, int y) {
 	if (d == 0)
@@ -176,7 +168,7 @@ void Date::setDefaultDate(int d, int m, int y) {
 	defaultDate.setDate(d, m, y);
 } // end function setDefaultDate
 
-// static function that gets default date
+  // static function that gets default date
 const Date & Date::getDefaultDate() {
 	return defaultDate;
 }// end function getDefaultDate
