@@ -6,5 +6,7 @@ Date case study using static data members
 Design a class date through which user must be able to perform following operations:
 
   * Get and set current day, month and year
+  * Get today's date
+  * Get age (in years)
   * Increment by x number of days, months and year
   * Set default date
