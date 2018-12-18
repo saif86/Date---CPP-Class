@@ -15,7 +15,6 @@ class Date
 	bool leapyear(int)const;	// utility function to check leap years
 public:
 	Date(int = 0, int = 0, int = 0);	// Constructor
-	Date(const Date &);			// Copy Constructor
 
 	friend ostream & operator <<(ostream &, const Date &);		// Stream Insertion
 	friend istream & operator >>(istream &, Date &);			// Stream Extraction
