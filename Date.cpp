@@ -1,35 +1,31 @@
 #include "Date.h"
-#include <iostream>
 #include <ctime>
 
-using namespace std;
-Date Date::defaultDate(7, 8, 1986);		// Class variable definition
+// File scope starts here 
+
+/*private static member cannot be accessed outside the class except for initialization*/
+Date Date::defaultDate(7, 8, 1986);		// intitalize class variable
 
 
-										// Constructor
-Date::Date(int d, int m, int y) :day(d), month(m), year(y)
-{
-	setDate(d, m, y);
-}
+// Date Default + Overloaded Constructor
+Date::Date(int d, int m, int y) : day(d), month(m), year(y) {
+	this->setDate(d, m, y);
+} // end Date constructor
 
 
-// Copy Constructor
-Date::Date(const Date & obj)
-{
-	setDate(obj.day, obj.month, obj.year);
-}
-
+// Date copy Constructor
+Date::Date(const Date & obj) {
+	this->setDate(obj.GET_DAY(), obj.GET_MONTH(), obj.GET_YEAR());
+} // end Date constructor
 
 // Stream Insertion
-ostream & operator<<(ostream & os, const Date & d)
-{
-	os << d.getDay() << "/" << d.getMonth() << "/" << d.getYear();
+ostream & operator<<(ostream & os, const Date & d) {
+	os << d.GET_DAY() << "/" << d.GET_MONTH() << "/" << d.GET_YEAR();
 	return os;
-}
+} // end stream insertion
 
 // Stream Extraction
-istream & operator >>(istream & is, Date & d)
-{
+istream & operator >>(istream & is, Date & d) {
 	int dd, mm, yy;
 	cout << "Enter Day: ";
 	is >> dd;
@@ -40,55 +36,63 @@ istream & operator >>(istream & is, Date & d)
 	d.setDate(dd, mm, yy);
 
 	return is;
-}
+} // end stream extraction
 
-void Date::setDay(int d)
-{
-	day = checkDay(d);      // validate the day
-}
+// function that sets day
+void Date::setDay(int d) {
+	this->day = this->checkDay(d);      // validate the day
+} // end function setDay
 
-void Date::setMonth(int m)
-{
+// function that sets month
+void Date::setMonth(int m) {
 	if (m > 0 && m <= 12)
-		month = m;
+		this->month = m;
 	else
-		month = defaultDate.month;
+		this->month = defaultDate.month;
+} // end function setMonth
 
-}
-
-void Date::setYear(int y)
-{
+// function that sets year
+void Date::setYear(int y) {
 	if (y > 0 && y <= 3000)
-		year = y;
+		this->year = y;
 	else
-		year = defaultDate.year;
-}
+		this->year = defaultDate.year;
+} // end function setYear
 
+// function that sets the Date
 void Date::setDate(int d, int m, int y) {
 	this->setYear(y);
 	this->setMonth(m);
 	this->setDay(d);
-}
+} // end function setDate
 
+// function that sets the Date
 void Date::setDate(const Date &obj) {
-	setDate(obj.getDay(), obj.getMonth(), obj.getYear());
-}
-int Date::getDay()const
-{
+	this->setDate(obj.GET_DAY(), obj.GET_MONTH(), obj.GET_YEAR());
+} // end function setDate
+
+// function that gets day
+int Date::GET_DAY()const {
 	return this->day;
-}
-int Date::getMonth()const
-{
+} // end function GET_DAY
+
+// function that gets month
+int Date::GET_MONTH()const {
 	return this->month;
-}
-int Date::getYear()const
-{
+} // end function GET_MONTH
+
+// function that gets year
+int Date::GET_YEAR()const {
 	return this->year;
-}
-Date Date::getDate()const {
+} // end function GET_YEAR
+
+// function that gets the Date
+const Date & Date::GET_DATE()const {
 	return *this;
-}
-Date Date::getToDay() {
+} // end function GET_DATE
+
+// function that gets today's date
+Date  Date::getToDay() {
 	time_t currentTime = time(NULL);
 	struct tm localTime;
 
@@ -98,76 +102,84 @@ Date Date::getToDay() {
 	int Day1 = localTime.tm_mday;
 	int Month1 = localTime.tm_mon + 1;
 	int Year1 = localTime.tm_year + 1900;
+	
 	Date t(Day1, Month1, Year1);
+	
 	return t;
-}
+} // end function getToDay
 
+
+// function that adds 'x' no. of days to the date
 void Date::addDay(int x) {
 	static const int daysPerMonth[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 	for (int i = 0; i < x; i++) {
-		day++;
+		this->day++;
 
 		// leap year case
-		if (month == 2 && day == 29 && leapyear(year))
+		if (this->month == 2 && this->day == 29 && this->leapyear(this->year))
 			continue;
 
 		// determine whether testDay is valid for specified month
-		if (day > daysPerMonth[month]) {
-			day = 1;
-			addMonth(1);
+		if (this->day > daysPerMonth[this->month]) {
+			this->day = 1;
+			this->addMonth(1);
 		}
 	}
-}
+} // end function addDay
 
+// function that adds 'x' no. of months to the date
 void Date::addMonth(int x) {
 	for (int i = 0; i < x; i++) {
-		month++;
-		if (month > 12) {
-			month = 1;
-			addYear(1);
+		this->month++;
+		if (this->month > 12) {
+			this->month = 1;
+			this->addYear(1);
 		}
 	}
-}
+} // end function addMonth
 
+// function that adds 'x' no. of years to the date
 void Date::addYear(int x) {
-	year += x;
+	this->year += x;
 	// leap year case
-	if (day == 29 && month == 2 && !leapyear(year)) {
-		day = 1;
-		month = 3;
+	if (this->day == 29 && this->month == 2 && !this->leapyear(this->year)) {
+		this->day = 1;
+		this->month = 3;
 	}
-}
+} // end function addYear
 
+// function that calculate age in years till to date
 double Date::caclAge() {
 	double y = 0.0, m= 0.0, d =0.0;
-	y = getToDay().getYear() - this->getYear();
-	m = getToDay().getMonth() - this->getMonth();
-	d = getToDay().getDay() - this->getDay();
+	y = getToDay().GET_YEAR() - this->GET_YEAR();
+	m = getToDay().GET_MONTH() - this->GET_MONTH();
+	d = getToDay().GET_DAY() - this->GET_DAY();
 
 	m = m / 12.0;
 	d = d / 365.25;
 	y = y + m + d;
 
 	return y;
-}
+} // end function caclAge
 
-void Date::setDefaultDate(int d, int m, int y)
-{
+
+// static function that sets default date
+void Date::setDefaultDate(int d, int m, int y) {
 	if (d == 0)
-		d = getToDay().getDay();
+		d = getToDay().GET_DAY();
 	if (m == 0)
-		m = getToDay().getMonth();
+		m = getToDay().GET_MONTH();
 	if (y == 0)
-		y = getToDay().getYear();
+		y = getToDay().GET_YEAR();
+
 	defaultDate.setDate(d, m, y);
-}
+} // end function setDefaultDate
 
-
-const Date & Date::getDefaultDate()
-{
+// static function that gets default date
+const Date & Date::getDefaultDate() {
 	return defaultDate;
-}
+}// end function getDefaultDate
 
 // utility function to confirm proper day value based on 
 // month and year; handles leap years, too
@@ -187,10 +199,10 @@ int Date::checkDay(int testDay) const {
 	return defaultDate.day;  // leave object in consistent state if bad value
 } // end function checkDay
 
-  // utility function to check leap years
+// utility function to check leap years
 bool Date::leapyear(int y)const {
 	if ((y % 400 == 0) || (y % 4 == 0 && y % 100 != 0))
 		return true;
 	else
 		return false;
-}
+} // end function leapyear
