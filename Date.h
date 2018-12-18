@@ -5,8 +5,7 @@
 using namespace std;
 
 // Date class definition
-class Date
-{
+class Date {
 	int day;
 	int month;
 	int year;
