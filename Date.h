@@ -82,6 +82,9 @@ public:
 	void SetMonth(int = 0);
 	void SetYear(int = 0);
 	void SetDate(int = 0, int = 0, int = 0);
+	/**
+ 	# @overload void SetDate(const Date& aDate)
+ 	*/
 	void SetDate(const Date&);
 	static void sSetDefaultDate(int = 0, int = 0, int = 0);		// default date setter function
 
