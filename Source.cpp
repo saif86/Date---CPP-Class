@@ -25,4 +25,5 @@ void main() {
 	cout << "Age: " << dob.CaclAge() << endl;
 
 	system("pause");
-} // end main
+} 
+// end main
