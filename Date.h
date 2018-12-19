@@ -1,4 +1,4 @@
-/**  Date class to handle dates in code.
+/**  Date class to handle dates in a C++ code.
 *
 * #include "Date.h" <BR>
 * -llib
