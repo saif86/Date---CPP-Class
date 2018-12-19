@@ -19,7 +19,7 @@ public:
 	/** Default + Overloaded constructor.
 	*/
 	Date(int = 0, int = 0, int = 0);
-										
+
 	// Use compiler-generated copy constructor, assignment, and destructor.
 	// Date(const Date&);
 	// Date& operator=(const Date&);
@@ -28,19 +28,21 @@ public:
 // OPERATORS
 	/** Stream Insertion operator.
 	*
+	* @param os Standard Output Stream.
 	* @param from The value to be inserted to the output stream.
 	*
 	* @return A reference to the standard output stream.
 	*/
-	friend std::ostream & operator <<(std::ostream& os, const Date& from);
+	friend std::ostream& operator <<(std::ostream& os, const Date& from);
 
 	/** Stream Extraction operator.
 	*
+	* @param is Standard Intput Stream.
 	* @param to The value to be extracted from the input stream.
 	*
 	* @return A reference to the standard input stream.
 	*/
-	friend std::istream& operator >>(std::istream&, Date& to);
+	friend std::istream& operator >>(std::istream& is, Date& to);
 
 // OPERATIONS
 	/** Add 'X' no. of days to the date object.
@@ -76,17 +78,19 @@ public:
 	double CaclAge();
 
 // ACCESS
-
 	// setters
 	void SetDay(int = 0);
 	void SetMonth(int = 0);
 	void SetYear(int = 0);
 	void SetDate(int = 0, int = 0, int = 0);
 	/**
- 	# @overload void SetDate(const Date& aDate)
- 	*/
+	# @overload void SetDate(const Date& aDate)
+	*/
 	void SetDate(const Date&);
-	static void sSetDefaultDate(int = 0, int = 0, int = 0);		// default date setter function
+	/**
+	# static function that sets default date
+	*/
+	static void sSetDefaultDate(int = 0, int = 0, int = 0);
 
 	// getters
 	int GetDay()const;
@@ -98,9 +102,10 @@ public:
 
 private:
 // INQUIRY
-	/** Check for day value based on month and year
+	/** utility function to confirm proper day value based on month and year.
+	* Also handles leap years.
 	*
-	* @param testDay The day to be checked.
+	* @param testDay The day to be tested.
 	*
 	* @return true if testDay is correct, false otherwise.
 	*/
