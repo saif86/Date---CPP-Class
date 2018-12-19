@@ -10,7 +10,8 @@ using namespace std;
 // Date Default + Overloaded Constructor
 Date::Date(int d, int m, int y) : mDay(d), mMonth(m), mYear(y) {
 	this->SetDate(d, m, y);
-} // end Date constructor
+} 
+// end Date constructor
 
 
 //============================= OPERATORS ====================================
@@ -19,7 +20,8 @@ Date::Date(int d, int m, int y) : mDay(d), mMonth(m), mYear(y) {
 ostream& operator<<(ostream& os, const Date& d) {
 	os << d.GetDay() << "/" << d.GetMonth() << "/" << d.GetYear();
 	return os;
-} // end stream insertion
+} 
+// end stream insertion
 
 // Stream Extraction
 istream& operator >>(istream& is, Date& d) {
@@ -33,7 +35,8 @@ istream& operator >>(istream& is, Date& d) {
 	d.SetDate(dd, mm, yy);
 
 	return is;
-} // end stream extraction
+} 
+// end stream extraction
 
 
 //============================= OPERATIONS ===================================
@@ -49,7 +52,8 @@ void Date::AddDay(int x) {
 			this->AddMonth(1);
 		}
 	}
-} // end function AddDay
+} 
+// end function AddDay
 
 // function that adds 'x' no. of months to the date
 void Date::AddMonth(int x) {
@@ -60,7 +64,8 @@ void Date::AddMonth(int x) {
 			this->AddYear(1);
 		}
 	}
-} // end function AddMonth
+} 
+// end function AddMonth
 
 // function that adds 'x' no. of years to the date
 void Date::AddYear(int x) {
@@ -70,7 +75,8 @@ void Date::AddYear(int x) {
 		this->mDay = 1;
 		this->mMonth = 3;
 	}
-} // end function AddYear
+} 
+// end function AddYear
 
 // function that calculate age in years till to date
 double Date::CaclAge() {
@@ -84,7 +90,8 @@ double Date::CaclAge() {
 	y = y + m + d;
 
 	return y;
-} // end function CaclAge
+} 
+// end function CaclAge
 
 
 //============================= ACESS      ===================================
@@ -98,7 +105,8 @@ void Date::SetDay(int aDay) {
 		cout << aDay << " is invalid day of the month. Setting to default day i.e. " << msDefaultDate.GetDay() << endl;
 	}
 
-} // end function SetDay
+} 
+// end function SetDay
 
 // function that sets month
 void Date::SetMonth(int aMonth) {
@@ -108,7 +116,8 @@ void Date::SetMonth(int aMonth) {
 		this->mMonth = msDefaultDate.GetMonth();
 		cout << aMonth << " is invalid month of a year. Setting to default month i.e. " << msDefaultDate.GetMonth() << endl;
 	}
-} // end function SetMonth
+} 
+// end function SetMonth
 
 // function that sets year
 void Date::SetYear(int aYear) {
@@ -118,19 +127,22 @@ void Date::SetYear(int aYear) {
 		this->mYear = msDefaultDate.GetYear();
 		cout << aYear << " is invalid year of the calendar. Setting to default year i.e. " << msDefaultDate.GetYear() << endl;
 	}
-} // end function SetYear
+} 
+// end function SetYear
 
 // function that sets the Date
 void Date::SetDate(int d, int m, int y) {
 	this->SetDay(d);
 	this->SetMonth(m);
 	this->SetYear(y);
-} // end function SetDate
+} 
+// end function SetDate
 
 // function that sets the Date
 void Date::SetDate(const Date &obj) {
 	this->SetDate(obj.GetDay(), obj.GetMonth(), obj.GetYear());
-} // end function SetDate
+} 
+// end function SetDate
 
 // static function that sets default date
 void Date::sSetDefaultDate(int aDay, int aMonth, int aYear) {
@@ -142,32 +154,38 @@ void Date::sSetDefaultDate(int aDay, int aMonth, int aYear) {
 		aYear = sGetTodaysDate().GetYear();
 
 	msDefaultDate.SetDate(aDay, aMonth, aYear);
-} // end function sSetDefaultDate
+} 
+// end function sSetDefaultDate
 
 // function that gets day
 int Date::GetDay()const {
 	return this->mDay;
-} // end function GetDay
+} 
+// end function GetDay
 
 // function that gets month
 int Date::GetMonth()const {
 	return this->mMonth;
-} // end function GetMonth
+} 
+// end function GetMonth
 
 // function that gets year
 int Date::GetYear()const {
 	return this->mYear;
-} // end function GetYear
+} 
+// end function GetYear
 
 // function that gets the Date
 const Date& Date::GetDate()const {
 	return *this;
-} // end function GetDate
+}
+// end function GetDate
 
 // static function that gets default date
 const Date& Date::sGetDefaultDate() {
 	return msDefaultDate;
-}// end function sGetDefaultDate
+}
+// end function sGetDefaultDate
 
 // static function that gets today's date
 Date  Date::sGetTodaysDate() {
@@ -184,14 +202,21 @@ Date  Date::sGetTodaysDate() {
 	Date t(Day1, Month1, Year1);
 
 	return t;
-} // end function sGetTodaysDate
+} 
+// end function sGetTodaysDate
 
 
 /////////////////////////////// PRIVATE    ///////////////////////////////////
 
 //============================= INQUIRY    ===================================
-// utility function to confirm proper day value based on 
-// month and year; handles leap years, too
+
+/** utility function to confirm proper day value based on month and year.
+* Also handles leap years.
+*
+* @param testDay The day to be tested.
+*
+* @return true if testDay is correct, false otherwise.
+*/
 bool Date::CheckDay(int testDay) const {
 	static const int daysPerMonth[13] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
@@ -204,15 +229,17 @@ bool Date::CheckDay(int testDay) const {
 		return true;
 
 	return false;  // leave object in consistent state if bad value
-} // end function CheckDay
+} 
+// end function CheckDay
 
-  // utility function to check leap years
+// utility function to check leap years
 bool Date::IsLeapYear(int testYear)const {
 	if ((testYear % 400 == 0) || (testYear % 4 == 0 && testYear % 100 != 0))
 		return true;
 	else
 		return false;
-} // end function CheckLeapYear
+} 
+// end function CheckLeapYear
 
 
 /*private static member cannot be accessed outside the class except for initialization*/
