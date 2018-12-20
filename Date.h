@@ -119,9 +119,13 @@ private:
 	*/
 	bool IsLeapYear(int testYear)const;
 
+// DATA MEMBERS
 	int mDay;
 	int mMonth;
 	int mYear;
-	static Date msDefaultDate;	// class variable shared by all objects of date class
-}; // end class Date
-#endif  // _DATE_H_
+	// class variable shared by all objects of date class
+	static Date msDefaultDate;	
+}; 
+// end class Date
+#endif  
+// _DATE_H_
